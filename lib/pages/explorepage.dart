@@ -1,72 +1,94 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:junglefriends/utils/constants.dart';
 
-import '../utils/constants.dart';
+import '../widgets/meet_the_monkeys_tab_widget.dart';
+import '../widgets/videos_tab_widget.dart';
 
 class ExplorePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: ListView(
-        children: [
-          buildExploreCard(
-            ctx: context,
-            tileTitle: Text(tileTitles[0]),
-            tileImage: tileImages[0],
-            onPressed: () {},
-          ),
-          buildExploreCard(
-            ctx: context,
-            tileTitle: Text(tileTitles[1]),
-            tileImage: tileImages[1],
-            onPressed: () {},
-          ),
-          buildExploreCard(
-            ctx: context,
-            tileTitle: Text(
-              tileTitles[2],
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(
+            'Jungle Friends Primate Sanctuary',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 18.0,
             ),
-            tileImage: tileImages[2],
-            onPressed: () {},
           ),
-          buildExploreCard(
-            ctx: context,
-            tileTitle: Text(
-              tileTitles[3],
+          bottom: TabBar(
+            isScrollable: false,
+            physics: NeverScrollableScrollPhysics(),
+            indicatorSize: TabBarIndicatorSize.tab,
+            indicator: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(10),
+                topRight: Radius.circular(10),
+              ),
+              color: Theme.of(context).primaryColorDark,
             ),
-            tileImage: tileImages[3],
-            onPressed: () {},
+            tabs: [
+              Tab(
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Expanded(
+                        child: Container(
+                          height: 30,
+                          child: Image(
+                            image: tileImages[0].image,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                      Text(
+                        'Meet the Monkeys',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Tab(
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Container(
+                        height: 30,
+                        child: Icon(
+                          Entypo.video,
+                          size: 18,
+                          color: Colors.black,
+                        ),
+                      ),
+                      Text(
+                        'Monkey Videos',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              )
+            ],
           ),
-          buildExploreCard(
-            ctx: context,
-            tileTitle: Text(
-              tileTitles[4],
-            ),
-            tileImage: tileImages[4],
-            onPressed: () {},
-          ),
-        ],
-      ),
-    );
-  }
-
-  Card buildExploreCard({
-    BuildContext ctx,
-    Widget tileTitle,
-    Image tileImage,
-    Function onPressed,
-  }) {
-    return Card(
-      margin: const EdgeInsets.all(8.0),
-      shadowColor: Theme.of(ctx).primaryColor,
-      elevation: 10,
-      child: Container(
-        height: 80,
-        child: Center(
-          child: ListTile(
-            leading: tileImage,
-            title: tileTitle,
-            onTap: onPressed,
-          ),
+        ),
+        body: TabBarView(
+          physics: AlwaysScrollableScrollPhysics(),
+          children: [
+            MeetTheMonkeysTabWidget(),
+            VideosTabWidget(),
+          ],
         ),
       ),
     );

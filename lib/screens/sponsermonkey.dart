@@ -10,6 +10,7 @@ class SponserAMonkey extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           'Sponser a Monkey'.toUpperCase(),
+          style: TextStyle(fontSize: 16),
         ),
       ),
       body: ListView(

@@ -9,7 +9,7 @@ class RRFund extends StatelessWidget {
         title: Text(
           'Research Retirement Fund'.toUpperCase(),
           style: TextStyle(
-            fontSize: 18,
+            fontSize: 16,
           ),
         ),
       ),
@@ -21,7 +21,7 @@ class RRFund extends StatelessWidget {
             style: TextStyle(
               color: Theme.of(context).primaryColorDark,
               fontWeight: FontWeight.bold,
-              fontSize: 18.0,
+              fontSize: 16.0,
             ),
           ),
           SizedBox(
@@ -92,7 +92,7 @@ class RRFund extends StatelessWidget {
             style: TextStyle(
               color: Theme.of(context).primaryColorDark,
               fontWeight: FontWeight.bold,
-              fontSize: 18.0,
+              fontSize: 16.0,
             ),
           ),
           SizedBox(

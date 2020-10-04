@@ -1,102 +1,65 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:provider/provider.dart';
 
-import '../providers/monkey_provider.dart';
+import '../widgets/swiper_widget.dart';
 import '../utils/constants.dart';
 import '../screens/rrfund.dart';
 import '../screens/sponsermonkey.dart';
 import '../screens/mmfund.dart';
+import '../utils/custom_drawer.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   static const routeName = 'homepage';
+  final String title = 'Jungle Friends Primate Sanctuary';
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        leading: Image.asset(
+          'images/logo.jpg',
+          fit: BoxFit.cover,
+        ),
+        title: Text(
+          widget.title,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 18.0,
+          ),
+        ),
+      ),
       backgroundColor: Color(0xFF6A8F49),
+      endDrawer: CustomDrawer(),
       body: Stack(
         children: [
-          Container(
-            child: Column(
-              children: [
-                Container(
-                  height: 100,
-                  width: double.infinity,
-                  child: Consumer<JFMonkeys>(
-                    builder: (ctx, monkeys, chld) =>
-                        monkeys.monkeyList.length <= 0
-                            ? CircularProgressIndicator()
-                            : Swiper(
-                                autoplay: true,
-                                curve: Curves.easeInOut,
-                                duration: 20,
-                                containerWidth: double.infinity,
-                                itemCount: monkeys.monkeyList.length,
-                                itemBuilder: (ctx, i) => Stack(
-                                  alignment: Alignment.center,
-                                  children: [
-                                    monkeys.monkeyList[i].localImage,
-                                    Padding(
-                                      padding:
-                                          const EdgeInsets.only(left: 280.0),
-                                      child: Text(
-                                        monkeys.monkeyList[i].title,
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                  ),
-                ),
-                Container(
-                  color: Color(0xFFD9AD42),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset('images/chevron.gif'),
-                      Expanded(
-                        child: Text(
-                          'do something amazing for the monkey during the pandemic!'
-                              .toUpperCase(),
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontFamily: 'Comfortaa',
-                            fontSize: 10,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
+          SwiperWidget(),
           Container(
             margin: const EdgeInsets.only(
               top: 130,
             ),
             child: Material(
+              color: Color(0xFF6A8F49),
               child: ListView(
                 children: [
                   ResearchRetirementFundCard(),
                   SponserAMonkeyCard(),
                   MonkeyMedicalFundCard(),
                   SizedBox(
-                    height: 40.0,
+                    height: 30.0,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 8.0),
                     child: Text(
-                      'Our partners',
+                      'Our partners'.toUpperCase(),
                       style: TextStyle(
-                        color: Colors.red,
                         fontWeight: FontWeight.bold,
-                        fontSize: 20.0,
+                        fontSize: 14.0,
+                        decoration: TextDecoration.underline,
+                        decorationThickness: 1.5,
                       ),
                     ),
                   ),
@@ -111,12 +74,18 @@ class HomePage extends StatelessWidget {
                       fontSize: 12,
                     ),
                   ),
+                  SizedBox(
+                    height: 6.0,
+                  ),
                   Text(
                     'Florida Dept. of Agriculture & Consumer Services Registration #CH10986',
                     style: TextStyle(
                       fontWeight: FontWeight.normal,
                       fontSize: 12,
                     ),
+                  ),
+                  SizedBox(
+                    height: 6.0,
                   ),
                   Text(
                     'A COPY OF THE OFFICIAL REGISTRATION AND FINANCIAL INFORMATION MAY BE '
@@ -131,12 +100,42 @@ class HomePage extends StatelessWidget {
                     height: 10,
                   ),
                   Text(
-                      'Copyright © 1998 – 2020, Jungle Friends Primate Sanctuary.'),
-                  Text('App designed and maintained by Freeman Kayiranga'),
+                    'Copyright © 1998 – 2020, Jungle Friends Primate Sanctuary.',
+                    style: TextStyle(
+                      fontWeight: FontWeight.normal,
+                      fontSize: 12,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 6.0,
+                  ),
+                  RichText(
+                    text: TextSpan(
+                      text: 'App designed and maintained by',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontFamily: 'Comfortaa',
+                        fontSize: 12,
+                      ),
+                      children: [
+                        TextSpan(
+                            text: ' Freeman Kayiranga',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Comfortaa',
+                            )),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 6.0,
+                  ),
                   Text(
                     'FreeCbh Designs',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
+                      fontSize: 12,
                     ),
                   )
                 ],
@@ -176,9 +175,10 @@ class ResearchRetirementFundCard extends StatelessWidget {
               'Research Retirement Fund',
               textAlign: TextAlign.start,
               style: TextStyle(
-                  fontSize: 18,
-                  color: Theme.of(context).primaryColorDark,
-                  fontWeight: FontWeight.bold),
+                fontSize: 18,
+                color: Theme.of(context).primaryColorDark,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
           SizedBox(
@@ -245,9 +245,10 @@ class SponserAMonkeyCard extends StatelessWidget {
               'Sponser a Monkey',
               textAlign: TextAlign.start,
               style: TextStyle(
-                  fontSize: 18,
-                  color: Theme.of(context).primaryColorDark,
-                  fontWeight: FontWeight.bold),
+                fontSize: 18,
+                color: Theme.of(context).primaryColorDark,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
           SizedBox(
@@ -363,18 +364,21 @@ class Sponsers extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: Container(
-        height: 240,
+        height: 200,
         width: double.infinity,
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
           itemCount: partnerImages.length,
           itemBuilder: (ctx, i) => Column(
             children: [
+              SizedBox(
+                height: 16,
+              ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
-                  height: 140,
-                  width: 140,
+                  height: 100,
+                  width: 100,
                   decoration: BoxDecoration(
                     border: Border.all(
                       color: Theme.of(context).primaryColorLight,
@@ -384,12 +388,15 @@ class Sponsers extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(2.0),
                 child: Container(
                   height: 50,
-                  width: 140,
+                  width: 100,
                   child: Text(
                     partnerTitles[i],
+                    style: TextStyle(
+                      fontSize: 10,
+                    ),
                   ),
                 ),
               ),

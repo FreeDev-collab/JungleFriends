@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 
 List<String> tileTitles = <String>[
-  'Meet The Monkeys',
-  'Monkey Videos',
+  'About Us',
   'How You Can Help',
   'Jungle News',
   'Topics',
 ];
 List<Image> tileImages = <Image>[
   Image.asset('images/meet.png'),
-  Image.asset('images/video.png'),
   Image.asset('images/help.png'),
   Image.asset('images/news.png'),
   Image.asset('images/topics.png'),
@@ -55,4 +53,22 @@ List<String> sponseredMonkeyTitles = [
   'Clementine',
   'Xenon',
   'Ernie',
+];
+
+List<String> jfMonkeyKind = <String>[
+  'Capuchins',
+  'Marmosets',
+  'Spider Monkeys',
+  'Squirrel Monkeys',
+  'Tamarins',
+  'Monkey Memorial',
+  'Tours',
+];
+
+List<String> jfMonkeyVideos = <String>[
+  'Monkey Movies',
+  'Monkeys in the Media',
+  'Life at Jungle Friends',
+  'Outreach Videos',
+  'Special Collections',
 ];

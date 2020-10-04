@@ -7,7 +7,8 @@ class MMFund extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Monkey Medical Fund',
+          'Monkey Medical Fund'.toUpperCase(),
+          style: TextStyle(fontSize: 16),
         ),
       ),
     );
